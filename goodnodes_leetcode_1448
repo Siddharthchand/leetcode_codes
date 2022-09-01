@@ -1,0 +1,42 @@
+/*Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
+  Return the number of good nodes in the binary tree.
+  Example 1:
+  Input: root = [3,1,4,3,null,1,5]
+  Output: 4 */
+  
+  https://leetcode.com/problems/count-good-nodes-in-binary-tree/
+
+public class TreeNode {
+     int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+ }
+ 
+ 
+class Solution 
+{
+    public int goodNodes(TreeNode root)
+    {
+        return dfsnodes(root,root.val);
+    }
+    public static int dfsnodes(TreeNode node,int max)
+    {
+        if(node==null) return 0;
+        int count=0;
+        if(max<=node.val)
+        {
+            count++;
+            max=node.val;   keep updating max value.
+        }
+        count+=dfsnodes(node.left,max);
+        count+=dfsnodes(node.right,max);
+        return count;
+    }
+}
